@@ -54,6 +54,7 @@
 <body>
     <?php include('./common/navbar.php');
     ?>
+    <!-- Edit and Create Form -->
     <div class="row m-auto">
         <div class="col-sm-1 d-none d-xl-block"></div>
         <div class="col-sm-5 col-xl-4 bg-info">
@@ -160,6 +161,7 @@
             <div class="d-flex justify-content-center mt-2">
                 <h2>Database</h2>
             </div>
+            <!-- Filter Form -->
             <div class="row ml-0 my-2">
                 <div>
                     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#filterFunction">
@@ -199,6 +201,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Loading data into table -->
             <div class="m-auto p-0 d-flex justify-content-center ">
                 <table class="table table-responsive table-hover m-auto">
                     <thead class="thead-dark">

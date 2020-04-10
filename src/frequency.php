@@ -13,6 +13,7 @@
         <h1>Big Query Result</h1>
     </div>
 	<?php
+	// Set up config
 		$client = new Google_Client();
 		$client->useApplicationDefaultCredentials();
 		$client->addScope(Google_Service_Bigquery::BIGQUERY);
@@ -28,11 +29,14 @@
 		$listOfEmployeeFirstNameF = array();
 		$dataArray = getEmployee();
 		if($dataArray != -1){
+			// Load data into serveral arrays
 			foreach($dataArray as $data){
+				// Getting data from bucket file
 				$eData = explode(",", $data);
 				array_push($listOfEmployeeID, $eData[0]);
 				array_push($listOfEmployeeFirstName, $eData[1]);
 				array_push($listOfEmployeeLastName, $eData[2]);
+				// Getting first name frequency from BigQuery
 				$request->setQuery("SELECT SUM(Frequency) AS total FROM [baby.baby_names] WHERE LOWER(name) = LOWER('$eData[1]')");
 				$response = $bigquery->jobs->query($projectId, $request);
 				$rows = $response->getRows();
@@ -41,6 +45,7 @@
 						array_push($listOfEmployeeFirstNameF, $field['v'] ? $field['v'] : 0);
 					}
 				}
+				// Getting last name frequency from BigQuery
 				$request->setQuery("SELECT SUM(Frequency) AS total FROM [baby.baby_names] WHERE LOWER(name) = LOWER('$eData[2]')");
 				$response = $bigquery->jobs->query($projectId, $request);
 				$rows = $response->getRows();
@@ -52,6 +57,7 @@
 			}
 		}
 	?>
+	<!-- Display data ino table -->
 	<div class="row m-0">
 		<div class="d-flex justify-content-center m-auto">
 			<table class="table table-hover m-auto">

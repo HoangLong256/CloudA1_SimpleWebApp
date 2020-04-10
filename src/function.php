@@ -1,6 +1,7 @@
 <?php
     include('./common/constant.php');
 
+    // Generate employee ID
     function generateID() {
         if(file_exists(employeeData)) {
             $dataArray = file(employeeData, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -14,6 +15,7 @@
         return -1;
     }
 
+    // Create employee
     function createEmployee(){
         $dataArray = file(employeeData, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $eID = generateID();
@@ -27,19 +29,7 @@
         return $dataText;
     }
 
-    function createEmployeeTest(){
-        $dataArray = file(employeeData, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $eID = generateID();
-        //$eDetail = "{$eID},{$_POST['firstName']},{$_POST['lastName']},{$_POST['gender']},{$_POST['age']},{$_POST['address']},{$_POST['phone']}";
-        $eDetail="{$eID},Long,Nguyen,M,9";
-        array_push($dataArray, $eDetail);
-        $dataText = implode("\n", $dataArray);
-        $csvFile = fopen(employeeData, 'w');
-        fwrite($csvFile, implode("\n", $dataArray));
-        fclose($csvFile);
-        return $dataText;
-    }
-
+    // Get employee data by ID
     function getEmployeeByID($id){
         $dataArray = file(employeeData, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         foreach($dataArray as $employee){
@@ -51,6 +41,7 @@
         return -1;
     }
 
+    // Get all employee 
     function getEmployee(){
         if(!file_exists(employeeData)){
             return -1;
@@ -58,6 +49,7 @@
         return file(employeeData, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 
+    // Update employee
     function updateEmployee(){
         if(!file_exists(employeeData)){
             return -1;
@@ -78,6 +70,7 @@
         return -1;
     }
 
+    // Delete Employee
     function deleteEmployee(){
         if(!file_exists(employeeData)){
             return -1;
@@ -95,7 +88,9 @@
         }
     }
 
-
+    // Seach employee by name
+    // Type 1: First name
+    // Type 2: Last name
     function searchByName($type, $name){
         if(!file_exists(employeeData)){
             return -1;
@@ -111,6 +106,7 @@
         return removeEmptyArray($foundData);
     }
 
+    // Filter Employee by Gender
     function filterByGender($gen){
         if(!file_exists(employeeData)){
             return -1;
@@ -126,6 +122,7 @@
         return removeEmptyArray($newData);
     }
 
+    // Filter employee by age
     function filterByAge($type){
         // 1: Over
         // 0: Under
@@ -145,6 +142,7 @@
         return $newData;
     }
 
+    // Remove empty array from data (handle bug)
     function removeEmptyArray($dataArray){
         $newArray = array();
         foreach($dataArray as $data){
@@ -154,6 +152,5 @@
         }
         return $newArray;
     }
-    
     
 ?>

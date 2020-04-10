@@ -1,10 +1,13 @@
 <?php
+    // Text validation : last name, first name, address...
     function textValidation($data){
         if(empty($data)){
             return 'Cannot be empty';
         }
         return 1;
     }
+
+    // Age Validation
     function ageValidation($data){
         if(empty($data)){
             return 'Cannot be empty';
@@ -17,6 +20,8 @@
         }
         return 1;
     }
+
+    // Phone Validation
     function phoneValidation($data){
         if(empty($data)){
             return 'Cannot be empty';

@@ -3,4 +3,4 @@
     <a href="#"> Nguyen Hoang Long</a>
   </div>
 </footer> 
-<!-- Footer
+<!-- Footer -->
